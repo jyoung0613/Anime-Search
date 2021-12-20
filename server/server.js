@@ -3,7 +3,7 @@ const path = require('path');
 
 // import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
-const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
+//const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
 
 // import our typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
