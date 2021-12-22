@@ -3,4 +3,5 @@ A performant and scalable MERN stack single-page application that fulfills a rea
 
 
 # Deployment
-![Heroku Site](https://protected-mesa-73098.herokuapp.com/)
+
+[AniSearch_Demo](https://protected-mesa-73098.herokuapp.com/)
