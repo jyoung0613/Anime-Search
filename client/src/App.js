@@ -7,7 +7,9 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import searchShows from './pages/SearchShows';
 import Navbar from './components/Navbar';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -35,6 +37,7 @@ function App() {
         <>
           <Navbar />
             <Switch>
+              <Route exact path='/' component={searchShows} />
               <Route render={() => <h1 className='display-2'>Work being done here!</h1>} />
             </Switch>
         </>
