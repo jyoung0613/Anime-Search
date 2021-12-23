@@ -27,38 +27,27 @@ const SearchShows = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!searchInput) {
-      return false;
-    }
-
-    const request = require("request");
+    const request = require('request');
 
     const options = {
-      method: "GET",
-      url: "https://watchmode.p.rapidapi.com/search/",
-      qs: { search_field: "name", search_value: "Anime", types: "tv,movie,person" },
+      method: 'GET',
+      url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
       headers: {
-        "x-rapidapi-host": "watchmode.p.rapidapi.com",
-        "x-rapidapi-key": "985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604",
-        useQueryString: true,
-      },
+        'x-rapidapi-host': 'top-anime.p.rapidapi.com',
+        'x-rapidapi-key': '985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604',
+        useQueryString: true
+      }
     };
 
     request(options, function (error, response, body) {
       if (error) throw new Error(error);
 
       console.log(body);
+      
     });
 
-    const { items } = await response.json();
-
-    const showData = items.map((show) => ({
-      title_results: [],
-      people_results: [],
-    }));
-
-    setSearchedShows(showData);
-    setSearchInput("Anime");
+    setSearchedShows('');
+    setSearchInput('');
   };
 
   const handleSaveShow = async (showId) => {
@@ -117,16 +106,8 @@ const SearchShows = () => {
           {searchedShows.map((show) => {
             return (
               <Card key={show.showId} border="dark">
-                {show.image ? (
-                  <Card.Img
-                    src={show.image}
-                    alt={`The cover for ${show.title}`}
-                    variant="top"
-                  />
-                ) : null}
                 <Card.Body>
                   <Card.Title>{show.title}</Card.Title>
-                  <Card.Text>{show.plot_overview}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedShowIds?.some(

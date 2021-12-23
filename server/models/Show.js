@@ -6,19 +6,11 @@ const showSchema = new Schema({
         type: String,
         required: true,
     },
-    plot_overview: {
+    address: {
         type: String,
         required: true,
     },
-    // saved show id from watchmode api
-    showId: {
-        type: String,
-        required: true,
-    },
-    thumbnail_url: {
-        type: String,
-    },
-    web_url: {
+    image: {
         type: String,
     },
 });

@@ -21,6 +21,7 @@ const SavedShows = () => {
 
         try {
             const { data } = await removeShow({
+                
                 variables: { showId },
             });
 
@@ -51,10 +52,8 @@ const SavedShows = () => {
                     {userData.savedShows.map((show) => {
                         return (
                             <Card key={show.showId} border='dark'>
-                                {show.thumbnail_url ? <Card.Img src={show.thumbnail_url} alt={`The cover for ${show.title}`} variant='top' /> : null}
                                 <Card.Body>
                                     <Card.Title>{show.title}</Card.Title>
-                                    <Card.Text>{show.overview}</Card.Text>
                                     <Button className='btn-block btn-danger' onClick={() => handleDeleteShow(show.showId)}>
                                         Delete this Show!
                                     </Button>

@@ -17,17 +17,15 @@ const typeDefs = gql`
     type Show {
         showId: ID!
         title: String
-        overview: String
-        thumbnail_url: String
-        web_url: String
+        address: String
+        image: String
     }
 
     type InputShow {
         showId: String
         title: String
-        overview: String
-        thumbnail_url: String
-        web_url: String
+        address: String
+        image: String
     }
 
     type Query {
