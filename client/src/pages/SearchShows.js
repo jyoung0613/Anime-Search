@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import { Jumbotron, Container, Col, Form, Button, CardColumns } from 'react-bootstrap';
 //import Auth from '../utils/auth';
 //import { useMutation } from '@apollo/client';
 
 
 const SearchShows = () => {
-    const [searchedShows, setSearchedShows] = useState([]);
+   // const [searchedShows, setSearchedShows] = useState([]);
     const [searchInput, setSearchInput] = useState('');
 
     const handleFormSubmit = async (event) => {
@@ -14,36 +14,27 @@ const SearchShows = () => {
         if (!searchInput) {
             return false;
         }
+
         const request = require('request');
 
         const options = {
           method: 'GET',
-          url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
+          url: 'https://watchmode.p.rapidapi.com/search/',
+          qs: {search_field: 'name', search_value: `${searchInput}`, types: 'tv'},
           headers: {
-            'x-rapidapi-host': 'top-anime.p.rapidapi.com',
+            'x-rapidapi-host': 'watchmode.p.rapidapi.com',
             'x-rapidapi-key': '985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604',
             useQueryString: true
           }
-        }
-      
+        };
+
         request(options, function (error, response, body) {
-	        if (error) throw new Error(error);
+          if (error) throw new Error(error);
+
 	        console.log(body);
         });
 
-        const response = request;
-
-        const { items } = response.json();
-
-        const showData = items.map((show) => ({
-            showId: show.id,
-            title: show.volumeInfo.title,
-            address: show.volumeInfo.address,
-            image: show.volumeInfo.imageLinks?.thumbnail || '',
-          }));
-
-          setSearchedShows(showData);
-          setSearchInput('');
+      setSearchInput('');
     };
 
     return (
@@ -75,7 +66,7 @@ const SearchShows = () => {
     
           <Container>
             <CardColumns>
-              {searchedShows.map((show) => {
+              {/* {searchedShows.map((show) => {
                 return (
                   <Card key={show.showId} border='dark'>
                     {show.image ? (
@@ -83,11 +74,10 @@ const SearchShows = () => {
                     ) : null}
                     <Card.Body>
                       <Card.Title>{show.title}</Card.Title>
-                      <Card.Text>{show.address}</Card.Text>
                     </Card.Body>
                   </Card>
                 );
-              })}
+              })} */}
             </CardColumns>
           </Container>
         </>
