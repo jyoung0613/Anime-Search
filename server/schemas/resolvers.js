@@ -38,28 +38,28 @@ const resolvers = {
 
       return { token, user };
     },
-    saveShow: async (parent, { newShow }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { savedShows: newShow }},
-          { new: true }
-        );
-        return updatedUser;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    removeShow: async (parent, { showId }, context) => {
-      if (context.user) {
-        const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedShows: { showId }}},
-          { new: true }
-        );
-        return updatedUser;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
+    // saveShow: async (parent, { newShow }, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { savedShows: newShow }},
+    //       { new: true }
+    //     );
+    //     return updatedUser;
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
+    // removeShow: async (parent, { showId }, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $pull: { savedShows: { showId }}},
+    //       { new: true }
+    //     );
+    //     return updatedUser;
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // },
   },
 };
 

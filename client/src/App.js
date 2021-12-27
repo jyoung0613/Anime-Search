@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import SearchShows from './pages/SearchShows';
-import SavedShows from './pages/SavedShows'
+//import SavedShows from './pages/SavedShows'
 import Navbar from './components/Navbar';
 
 const httpLink = createHttpLink({
@@ -38,7 +38,6 @@ function App() {
           <Navbar />
             <Switch>
               <Route exact path='/' component={SearchShows} />
-              <Route exact path='/saved' component={SavedShows} />
               <Route render={() => <h1 className='display-2'>Wrong Page!</h1>} />
             </Switch>
         </>

@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Jumbotron,
   Container,
   Col,
   Form,
   Button,
-  Card,
   CardColumns,
 } from "react-bootstrap";
-import Auth from "../utils/auth";
-import { saveShowIds, getSavedShowIds } from "../utils/localStorage";
-import { useMutation } from "@apollo/client";
-import { SAVE_SHOW } from "../utils/mutations";
+//import Auth from "../utils/auth";
+//import { saveShowIds, getSavedShowIds } from "../utils/localStorage";
+//import { useMutation } from "@apollo/client";
+//import { SAVE_SHOW } from "../utils/mutations";
 
 const SearchShows = () => {
-  const [searchedShows, setSearchedShows] = useState([]);
+  //const [searchedShows, setSearchedShows] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
+  //const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
-  const [saveShow, { error }] = useMutation(SAVE_SHOW);
+  //const [saveShow, { error }] = useMutation(SAVE_SHOW);
 
-  useEffect(() => {
-    return () => saveShowIds(savedShowIds);
-  });
+  // useEffect(() => {
+  //   return () => saveShowIds(savedShowIds);
+  // });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -46,28 +45,26 @@ const SearchShows = () => {
       
     });
 
-    setSearchedShows('');
-    setSearchInput('');
   };
 
-  const handleSaveShow = async (showId) => {
-    const showToSave = searchedShows.find((show) => show.showId === showId);
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+  // const handleSaveShow = async (showId) => {
+  //   const showToSave = searchedShows.find((show) => show.showId === showId);
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+  //   if (!token) {
+  //     return false;
+  //   }
 
-    try {
-      const { data } = await saveShow({
-        variables: { newShow: { ...showToSave } },
-      });
+  //   try {
+  //     const { data } = await saveShow({
+  //       variables: { newShow: { ...showToSave } },
+  //     });
 
-      setSavedShowIds([...savedShowIds, showToSave.showId]);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     setSavedShowIds([...savedShowIds, showToSave.showId]);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <>
@@ -97,13 +94,13 @@ const SearchShows = () => {
       </Jumbotron>
 
       <Container>
-        <h2>
+        {/* <h2>
           {searchedShows.length
             ? `Viewing ${searchedShows.length} results:`
             : "Search for a show to begin"}
-        </h2>
+        </h2> */}
         <CardColumns>
-          {searchedShows.map((show) => {
+          {/* {searchedShows.map((show) => {
             return (
               <Card key={show.showId} border="dark">
                 <Card.Body>
@@ -126,7 +123,7 @@ const SearchShows = () => {
                 </Card.Body>
               </Card>
             );
-          })}
+          })} */}
         </CardColumns>
       </Container>
     </>

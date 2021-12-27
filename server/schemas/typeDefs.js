@@ -21,13 +21,6 @@ const typeDefs = gql`
         image: String
     }
 
-    type InputShow {
-        showId: String
-        title: String
-        address: String
-        image: String
-    }
-
     type Query {
         me: User
     }
@@ -35,8 +28,6 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveShow(newShow: InputShow!): User
-        removeShow(showId: ID!): User
     }
     `;
 

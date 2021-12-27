@@ -18,15 +18,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
-        // set savedShows to be an array of data that adheres to the bookSchema
-        savedShows: [showSchema],
     },
-    // set this to use virtual below
-    {
-        toJSON: {
-            virtuals: true,
-        },
-    }
 );
 
 // hash user password
@@ -44,10 +36,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcryptjs.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `showCount` with the number of saved shows we have
-userSchema.virtual('showCount').get(function () {
-    return this.savedShows.length;
-});
+// // when we query a user, we'll also get another field called `showCount` with the number of saved shows we have
+// userSchema.virtual('showCount').get(function () {
+//     return this.savedShows.length;
+// });
 
 const User = model('User', userSchema);
 
