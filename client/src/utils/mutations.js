@@ -34,7 +34,49 @@ export const ADD_USER = gql`
         _id
         username
         email
+        showCount
+        savedShows {
+          showId
+          title
+          overview
+          thumbnail_url
+          web_url
+        }
       }
     }
   }
+`;
+
+export const SAVE_SHOW = gql`
+mutation saveShow($newShow: InputShow!) {
+  saveShow(newShow: $newShow) {
+    _id
+    username
+    email
+    savedShows {
+      showId
+      title
+      overview
+      thumbnail_url
+      web_url
+    }
+  }
+}
+`;
+
+export const REMOVE_SHOW = gql`
+mutation removeShow($showId: ID!) {
+  removeShow(showId: $showId) {
+    _id
+    username
+    email
+    savedShows {
+      showId
+      title
+      overview
+      thumbnail_url
+      web_url
+    }
+  }
+}
 `;

@@ -1,98 +1,133 @@
-import React, { useState } from 'react';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-//import Auth from '../utils/auth';
-//import { useMutation } from '@apollo/client';
-
+import React, { useState } from "react";
+import {
+  Jumbotron,
+  Container,
+  Col,
+  Form,
+  Button,
+  CardColumns,
+} from "react-bootstrap";
+//import Auth from "../utils/auth";
+//import { saveShowIds, getSavedShowIds } from "../utils/localStorage";
+//import { useMutation } from "@apollo/client";
+//import { SAVE_SHOW } from "../utils/mutations";
 
 const SearchShows = () => {
-    const [searchedShows, setSearchedShows] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+  //const [searchedShows, setSearchedShows] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  //const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
+  //const [saveShow, { error }] = useMutation(SAVE_SHOW);
 
-        if (!searchInput) {
-            return false;
-        }
-        const request = require('request');
+  // useEffect(() => {
+  //   return () => saveShowIds(savedShowIds);
+  // });
 
-        const options = {
-          method: 'GET',
-          url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
-          headers: {
-            'x-rapidapi-host': 'top-anime.p.rapidapi.com',
-            'x-rapidapi-key': '985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604',
-            useQueryString: true
-          }
-        }
-      
-        request(options, function (error, response, body) {
-	        if (error) throw new Error(error);
-	        console.log(body);
-        });
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-        const response = request;
+    const request = require('request');
 
-        const { items } = response.json();
-
-        const showData = items.map((show) => ({
-            showId: show.id,
-            title: show.volumeInfo.title,
-            address: show.volumeInfo.address,
-            image: show.volumeInfo.imageLinks?.thumbnail || '',
-          }));
-
-          setSearchedShows(showData);
-          setSearchInput('');
+    const options = {
+      method: 'GET',
+      url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
+      headers: {
+        'x-rapidapi-host': 'top-anime.p.rapidapi.com',
+        'x-rapidapi-key': '985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604',
+        useQueryString: true
+      }
     };
 
-    return (
-        <>
-          <Jumbotron fluid className='text-light bg-dark'>
-            <Container>
-              <h1>Search for Shows!</h1>
-              <Form onSubmit={handleFormSubmit}>
-                <Form.Row>
-                  <Col xs={12} md={8}>
-                    <Form.Control
-                      name='searchInput'
-                      value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                      type='text'
-                      size='lg'
-                      placeholder='Search for a show'
-                    />
-                  </Col>
-                  <Col xs={12} md={4}>
-                    <Button type='submit' variant='success' size='lg'>
-                      Submit Search
-                    </Button>
-                  </Col>
-                </Form.Row>
-              </Form>
-            </Container>
-          </Jumbotron>
-    
-          <Container>
-            <CardColumns>
-              {searchedShows.map((show) => {
-                return (
-                  <Card key={show.showId} border='dark'>
-                    {show.image ? (
-                      <Card.Img src={show.image} alt={`The cover for ${show.title}`} variant='top' />
-                    ) : null}
-                    <Card.Body>
-                      <Card.Title>{show.title}</Card.Title>
-                      <Card.Text>{show.address}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                );
-              })}
-            </CardColumns>
-          </Container>
-        </>
-      );
-}
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
 
+      console.log(body);
+      
+    });
+
+  };
+
+  // const handleSaveShow = async (showId) => {
+  //   const showToSave = searchedShows.find((show) => show.showId === showId);
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //   if (!token) {
+  //     return false;
+  //   }
+
+  //   try {
+  //     const { data } = await saveShow({
+  //       variables: { newShow: { ...showToSave } },
+  //     });
+
+  //     setSavedShowIds([...savedShowIds, showToSave.showId]);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+  return (
+    <>
+      <Jumbotron fluid className="text-light bg-dark">
+        <Container>
+          <h1>Search for Shows!</h1>
+          <Form onSubmit={handleFormSubmit}>
+            <Form.Row>
+              <Col xs={12} md={8}>
+                <Form.Control
+                  name="searchInput"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  type="text"
+                  size="lg"
+                  placeholder="Search for a show"
+                />
+              </Col>
+              <Col xs={12} md={4}>
+                <Button type="submit" variant="success" size="lg">
+                  Submit Search
+                </Button>
+              </Col>
+            </Form.Row>
+          </Form>
+        </Container>
+      </Jumbotron>
+
+      <Container>
+        {/* <h2>
+          {searchedShows.length
+            ? `Viewing ${searchedShows.length} results:`
+            : "Search for a show to begin"}
+        </h2> */}
+        <CardColumns>
+          {/* {searchedShows.map((show) => {
+            return (
+              <Card key={show.showId} border="dark">
+                <Card.Body>
+                  <Card.Title>{show.title}</Card.Title>
+                  {Auth.loggedIn() && (
+                    <Button
+                      disabled={savedShowIds?.some(
+                        (savedShowId) => savedShowId === show.showId
+                      )}
+                      className="btn-block btn-info"
+                      onClick={() => handleSaveShow(show.showId)}
+                    >
+                      {savedShowIds?.some(
+                        (savedShowId) => savedShowId === show.showId
+                      )
+                        ? "This show has already been saved!"
+                        : "Save this Show!"}
+                    </Button>
+                  )}
+                </Card.Body>
+              </Card>
+            );
+          })} */}
+        </CardColumns>
+      </Container>
+    </>
+  );
+};
 
 export default SearchShows;

@@ -5,11 +5,20 @@ const typeDefs = gql`
         _id: ID!
         username: String!
         email: String!
+        showCount: Int
+        savedShows: [Show]
     }
     
     type Auth {
         token: ID!
         user: User
+    }
+
+    type Show {
+        showId: ID!
+        title: String
+        address: String
+        image: String
     }
 
     type Query {
