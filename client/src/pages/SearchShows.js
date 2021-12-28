@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Jumbotron,
   Container,
@@ -6,13 +6,23 @@ import {
   Form,
   Button,
   CardColumns,
+  Card
 } from "react-bootstrap";
-//import Auth from '../utils/auth';
-//import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
+import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
+import { SAVE_SHOW } from "../utils/mutations"
 
 const SearchShows = () => {
-  // const [searchedShows, setSearchedShows] = useState([]);
+  const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds)
+
+  const [saveShow, { error }] = useMutation(SAVE_SHOW)
+
+useEffect(() => {
+  return () => saveShowIds(savedShowIds)
+})
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -31,13 +41,18 @@ const SearchShows = () => {
         "x-rapidapi-key": "985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604",
         useQueryString: true,
       },
-    };
+      
+      };
+    
 
     request(options, function (error, response, body) {
       if (error) throw new Error(error);
 
       console.log(body);
     });
+
+    
+
   };
 
   return (
@@ -69,7 +84,7 @@ const SearchShows = () => {
 
       <Container>
         <CardColumns>
-          {/* {searchedShows.map((show) => {
+          {searchedShow.map((show) => {
                 return (
                   <Card key={show.showId} border='dark'>
                     {show.image ? (
@@ -80,7 +95,7 @@ const SearchShows = () => {
                     </Card.Body>
                   </Card>
                 );
-              })} */}
+              })}
         </CardColumns>
       </Container>
     </>
