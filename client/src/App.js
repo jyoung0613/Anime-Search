@@ -7,7 +7,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import searchShows from './pages/SearchShows';
+import SearchShows from './pages/SearchShows';
 import Navbar from './components/Navbar';
 
 
@@ -37,8 +37,8 @@ function App() {
         <>
           <Navbar />
             <Switch>
-              <Route exact path='/' component={searchShows} />
-              <Route render={() => <h1 className='display-2'>Work being done here!</h1>} />
+              <Route exact path='/' component={SearchShows} />
+              <Route render={() => <h1 className='display-2'>Wrong Page!</h1>} />
             </Switch>
         </>
       </Router>

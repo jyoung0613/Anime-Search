@@ -18,7 +18,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
-    }
+    },
 );
 
 // hash user password
@@ -35,6 +35,7 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcryptjs.compare(password, this.password);
 };
+
 
 const User = model('User', userSchema);
 
