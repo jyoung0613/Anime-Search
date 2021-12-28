@@ -12,13 +12,6 @@ const typeDefs = gql`
         user: User
     }
 
-    type Show {
-        showId: ID!
-        name: String!
-        type: String!
-        image: String!
-    }
-
     type Query {
         me: User
     }
