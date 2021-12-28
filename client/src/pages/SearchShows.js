@@ -7,64 +7,38 @@ import {
   Button,
   CardColumns,
 } from "react-bootstrap";
-//import Auth from "../utils/auth";
-//import { saveShowIds, getSavedShowIds } from "../utils/localStorage";
-//import { useMutation } from "@apollo/client";
-//import { SAVE_SHOW } from "../utils/mutations";
+//import Auth from '../utils/auth';
+//import { useMutation } from '@apollo/client';
 
 const SearchShows = () => {
-  //const [searchedShows, setSearchedShows] = useState([]);
+  // const [searchedShows, setSearchedShows] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  //const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
-
-  //const [saveShow, { error }] = useMutation(SAVE_SHOW);
-
-  // useEffect(() => {
-  //   return () => saveShowIds(savedShowIds);
-  // });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const request = require('request');
+    if (!searchInput) {
+      return false;
+    }
+
+    const request = require("request");
 
     const options = {
-      method: 'GET',
+      method: "GET",
       url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
       headers: {
-        'x-rapidapi-host': 'top-anime.p.rapidapi.com',
-        'x-rapidapi-key': '985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604',
-        useQueryString: true
-      }
+        "x-rapidapi-host": "top-anime.p.rapidapi.com",
+        "x-rapidapi-key": "985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604",
+        useQueryString: true,
+      },
     };
 
     request(options, function (error, response, body) {
       if (error) throw new Error(error);
 
       console.log(body);
-      
     });
-
   };
-
-  // const handleSaveShow = async (showId) => {
-  //   const showToSave = searchedShows.find((show) => show.showId === showId);
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const { data } = await saveShow({
-  //       variables: { newShow: { ...showToSave } },
-  //     });
-
-  //     setSavedShowIds([...savedShowIds, showToSave.showId]);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   return (
     <>
@@ -94,36 +68,19 @@ const SearchShows = () => {
       </Jumbotron>
 
       <Container>
-        {/* <h2>
-          {searchedShows.length
-            ? `Viewing ${searchedShows.length} results:`
-            : "Search for a show to begin"}
-        </h2> */}
         <CardColumns>
           {/* {searchedShows.map((show) => {
-            return (
-              <Card key={show.showId} border="dark">
-                <Card.Body>
-                  <Card.Title>{show.title}</Card.Title>
-                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedShowIds?.some(
-                        (savedShowId) => savedShowId === show.showId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveShow(show.showId)}
-                    >
-                      {savedShowIds?.some(
-                        (savedShowId) => savedShowId === show.showId
-                      )
-                        ? "This show has already been saved!"
-                        : "Save this Show!"}
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            );
-          })} */}
+                return (
+                  <Card key={show.showId} border='dark'>
+                    {show.image ? (
+                      <Card.Img src={show.image} alt={`The cover for ${show.title}`} variant='top' />
+                    ) : null}
+                    <Card.Body>
+                      <Card.Title>{show.title}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                );
+              })} */}
         </CardColumns>
       </Container>
     </>
