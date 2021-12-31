@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Jumbotron,
   Container,
@@ -6,14 +6,23 @@ import {
   Form,
   Button,
   CardColumns,
-  Card,
+  Card
 } from "react-bootstrap";
-//import Auth from '../utils/auth';
-//import { useMutation } from '@apollo/client';
-
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
+import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
+import { SAVE_SHOW } from "../utils/mutations"
+import { SHOWS } from "../utils/queries"
 const SearchShows = () => {
-  const [searchedShows, setSearchedShows] = useState([]);
+  const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds)
+
+  const [saveShow, { error }] = useMutation(SAVE_SHOW)
+
+useEffect(() => {
+  return () => saveShowIds(savedShowIds)
+},[])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -22,26 +31,21 @@ const SearchShows = () => {
       return false;
     }
 
-    const request = require("request");
-
     const options = {
       method: "GET",
-      url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
+      
       headers: {
         "x-rapidapi-host": "top-anime.p.rapidapi.com",
         "x-rapidapi-key": "985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604",
         useQueryString: true,
       },
-    };
+      
+      };
+    fetch(`https://top-anime.p.rapidapi.com/anime/${searchInput}`, options)
+    .then(data => data.json())
+      .then(data => setSearchedShow(data))
 
-    request(options, function (error, response, body) {
-      if (error) throw new Error(error);
-
-      console.log(body);
-    })
-    setSearchedShows('');
-    setSearchInput('');
-  };
+    }
 
   return (
     <>
@@ -72,9 +76,9 @@ const SearchShows = () => {
 
       <Container>
         <CardColumns>
-          {searchedShows.map((show) => {
+          {searchedShow.length && searchedShow.map((show, i) => {
                 return (
-                  <Card key={show.showId} border='dark'>
+                  <Card key={i} border='dark'>
                     {show.image ? (
                       <Card.Img src={show.image} alt={`The cover for ${show.title}`} variant='top' />
                     ) : null}

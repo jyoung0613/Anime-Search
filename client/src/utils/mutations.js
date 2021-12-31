@@ -38,3 +38,20 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SAVE_SHOW = gql`
+  mutation saveShow($newShow: InputShow!) {
+    savedShow(newShow: $newShow) {
+      _id
+      username
+      email
+      savedShow {
+        showid
+        title
+        description
+        image
+        link
+      }
+    }
+  }
+`
