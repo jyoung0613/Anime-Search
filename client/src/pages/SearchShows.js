@@ -12,7 +12,7 @@ import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
 import { SAVE_SHOW } from "../utils/mutations"
-
+import { SHOWS } from "../utils/queries"
 const SearchShows = () => {
   const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -22,7 +22,7 @@ const SearchShows = () => {
 
 useEffect(() => {
   return () => saveShowIds(savedShowIds)
-})
+},[])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -31,11 +31,9 @@ useEffect(() => {
       return false;
     }
 
-    const request = require("request");
-
     const options = {
       method: "GET",
-      url: `https://top-anime.p.rapidapi.com/anime/${searchInput}`,
+      
       headers: {
         "x-rapidapi-host": "top-anime.p.rapidapi.com",
         "x-rapidapi-key": "985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604",
@@ -43,17 +41,11 @@ useEffect(() => {
       },
       
       };
-    
+    fetch(`https://top-anime.p.rapidapi.com/anime/${searchInput}`, options)
+    .then(data => data.json())
+      .then(data => setSearchedShow(data))
 
-    request(options, function (error, response, body) {
-      if (error) throw new Error(error);
-
-      console.log(body);
-    });
-
-    
-
-  };
+    }
 
   return (
     <>
@@ -84,9 +76,9 @@ useEffect(() => {
 
       <Container>
         <CardColumns>
-          {searchedShow.map((show) => {
+          {searchedShow.length && searchedShow.map((show, i) => {
                 return (
-                  <Card key={show.showId} border='dark'>
+                  <Card key={i} border='dark'>
                     {show.image ? (
                       <Card.Img src={show.image} alt={`The cover for ${show.title}`} variant='top' />
                     ) : null}
