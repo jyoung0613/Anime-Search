@@ -6,12 +6,13 @@ import {
   Form,
   Button,
   CardColumns,
+  Card,
 } from "react-bootstrap";
 //import Auth from '../utils/auth';
 //import { useMutation } from '@apollo/client';
 
 const SearchShows = () => {
-  // const [searchedShows, setSearchedShows] = useState([]);
+  const [searchedShows, setSearchedShows] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   const handleFormSubmit = async (event) => {
@@ -37,7 +38,9 @@ const SearchShows = () => {
       if (error) throw new Error(error);
 
       console.log(body);
-    });
+    })
+    setSearchedShows('');
+    setSearchInput('');
   };
 
   return (
@@ -69,7 +72,7 @@ const SearchShows = () => {
 
       <Container>
         <CardColumns>
-          {/* {searchedShows.map((show) => {
+          {searchedShows.map((show) => {
                 return (
                   <Card key={show.showId} border='dark'>
                     {show.image ? (
@@ -77,10 +80,11 @@ const SearchShows = () => {
                     ) : null}
                     <Card.Body>
                       <Card.Title>{show.title}</Card.Title>
+                      <Card.Footer>{show.address}</Card.Footer>
                     </Card.Body>
                   </Card>
                 );
-              })} */}
+              })}
         </CardColumns>
       </Container>
     </>
