@@ -54,4 +54,20 @@ export const SAVE_SHOW = gql`
       }
     }
   }
-`
+`;
+
+export const REMOVE_SHOW = gql`
+mutation removeShow($showId: ID!) {
+  removeShow(showId: $showId) {
+    _id
+    username
+    email
+    savedShows {
+      showId
+      title
+      address
+      image
+    }
+  }
+}
+`;

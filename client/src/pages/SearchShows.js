@@ -45,7 +45,8 @@ useEffect(() => {
     .then(data => data.json())
       .then(data => setSearchedShow(data))
 
-    }
+    };
+
 
   return (
     <>

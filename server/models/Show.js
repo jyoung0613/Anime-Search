@@ -1,6 +1,9 @@
 const { Schema } = require('mongoose');
 
 const showSchema = new Schema({
+    showId: {
+        type: String,
+    },
     title: {
         type: String,
         required: true,
