@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 const bcryptjs = require('bcryptjs');
 
+// import schema from Show.js
+const showSchema = require('./Show');
+
 const userSchema = new Schema(
     {
         username: {

@@ -9,12 +9,16 @@ const typeDefs = gql`
         savedShows: [Show]
     }
 
+    type Auth {
+        token: ID!
+        user: User
+    }
+
     type Show {
         showId: ID!
         title: String
         address: String
         image: String
-
     }
 
     input InputShow {
@@ -24,11 +28,6 @@ const typeDefs = gql`
         image: String
     }
     
-    type Auth {
-        token: ID!
-        user: User
-    }
-
     type Query {
         me: User
     }

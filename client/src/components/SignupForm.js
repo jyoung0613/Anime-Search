@@ -77,6 +77,7 @@ const SignupForm = () => {
           <Form.Control
             type='text'
             placeholder='Your username'
+            autoComplete='current-username'
             name='username'
             onChange={handleInputChange}
             value={userFormData.username}
@@ -90,6 +91,7 @@ const SignupForm = () => {
           <Form.Control
             type='email'
             placeholder='Your email address'
+            autoComplete='current-email'
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
@@ -103,6 +105,7 @@ const SignupForm = () => {
           <Form.Control
             type='password'
             placeholder='Your password'
+            autoComplete='current-password'
             name='password'
             onChange={handleInputChange}
             value={userFormData.password}

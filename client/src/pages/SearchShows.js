@@ -5,14 +5,14 @@ import {
   Col,
   Form,
   Button,
-  CardColumns,
-  Card
+  Card,
+  CardColumns
 } from "react-bootstrap";
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
 import { SAVE_SHOW } from "../utils/mutations"
-import { SHOWS } from "../utils/queries"
+
 const SearchShows = () => {
   const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -47,6 +47,24 @@ useEffect(() => {
 
     };
 
+    const handleSaveShow = async (showId) => {
+      const showToSave = searchedShow.find((show) => show.showId === showId);
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+      if (!token) {
+        return false;
+      }
+
+      try {
+        const { data } = await saveShow({
+          variables: { newShow: { ...showToSave } },
+        });
+
+        setSavedShowIds([...savedShowIds, showToSave.showId]);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
   return (
     <>
@@ -76,6 +94,11 @@ useEffect(() => {
       </Jumbotron>
 
       <Container>
+      <h2>
+        {searchedShow.length
+          ? `Viewing ${searchedShow.length} results:`
+          : 'Search for a show to begin'}
+      </h2>
         <CardColumns>
           {searchedShow.length && searchedShow.map((show, i) => {
                 return (
@@ -85,7 +108,17 @@ useEffect(() => {
                     ) : null}
                     <Card.Body>
                       <Card.Title>{show.title}</Card.Title>
-                      <Card.Footer>{show.address}</Card.Footer>
+                      <Card.Link>{show.address}</Card.Link>
+                      {Auth.loggedIn() && (
+                        <Button
+                          disabled={savedShowIds?.some((savedShowId) => savedShowId === show.showId)}
+                          className='btn-block btn-info'
+                          onClick={() => handleSaveShow(show.showId)}>
+                          {savedShowIds?.some((savedShowId) => savedShowId === show.showId)
+                            ? 'This show has already been saved!'
+                            : 'Save this Show!'}
+                          </Button>
+                      )}
                     </Card.Body>
                   </Card>
                 );

@@ -48,9 +48,8 @@ export const SAVE_SHOW = gql`
       savedShow {
         showid
         title
-        description
+        address
         image
-        link
       }
     }
   }
