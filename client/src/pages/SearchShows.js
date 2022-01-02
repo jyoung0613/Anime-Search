@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Form,
-  Button,
-  Card,
-  CardColumns
-} from "react-bootstrap";
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from "react-bootstrap";
 import Auth from '../utils/auth';
-import { useMutation } from '@apollo/client';
 import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
+import { useMutation } from '@apollo/client';
 import { SAVE_SHOW } from "../utils/mutations"
 
 const SearchShows = () => {
   const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds)
+  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
-  const [saveShow, { error }] = useMutation(SAVE_SHOW)
+  const [saveShow, { error }] = useMutation(SAVE_SHOW);
+  console.log(error);
 
-useEffect(() => {
-  return () => saveShowIds(savedShowIds)
-},[])
+  useEffect(() => {
+    return () => saveShowIds(savedShowIds)
+  })
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

@@ -18,6 +18,7 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
+  console.log(data);
 
   useEffect(() => {
     if (error) {
@@ -50,6 +51,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
+      
 
       Auth.login(data.addUser.token);
     } catch (err) {
