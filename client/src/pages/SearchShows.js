@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
-import {
-  Jumbotron,
-  Container,
-  Col,
-  Form,
-  Button,
-  CardColumns,
-  Card
-} from "react-bootstrap";
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from "react-bootstrap";
 import Auth from '../utils/auth';
-import { useMutation } from '@apollo/client';
 import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
+import { useMutation } from '@apollo/client';
 import { SAVE_SHOW } from "../utils/mutations"
+<<<<<<< HEAD
 import { SHOWS } from "../utils/queries"
+=======
+>>>>>>> 561ef13427962f3639555b4656f2172048604c11
 
 const SearchShows = () => {
   const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds)
+  const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
-  const [saveShow, { error }] = useMutation(SAVE_SHOW)
+  const [saveShow, { error }] = useMutation(SAVE_SHOW);
+  console.log(error);
 
-useEffect(() => {
-  return () => saveShowIds(savedShowIds)
-},[])
+  useEffect(() => {
+    return () => saveShowIds(savedShowIds)
+  })
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -46,8 +42,31 @@ useEffect(() => {
     .then(data => data.json())
       .then(data => setSearchedShow(data))
 
+<<<<<<< HEAD
     }
     
+=======
+    };
+
+    const handleSaveShow = async (showId) => {
+      const showToSave = searchedShow.find((show) => show.showId === showId);
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+      if (!token) {
+        return false;
+      }
+
+      try {
+        const { data } = await saveShow({
+          variables: { newShow: { ...showToSave } },
+        });
+
+        setSavedShowIds([...savedShowIds, showToSave.showId]);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+>>>>>>> 561ef13427962f3639555b4656f2172048604c11
 
   return (
     <>
@@ -77,6 +96,11 @@ useEffect(() => {
       </Jumbotron>
 
       <Container>
+      <h2>
+        {searchedShow.length
+          ? `Viewing ${searchedShow.length} results:`
+          : 'Search for a show to begin'}
+      </h2>
         <CardColumns>
           {searchedShow.length && searchedShow.map((show, i) => {
                 return (
@@ -86,6 +110,17 @@ useEffect(() => {
                     ) : null}
                     <Card.Body>
                       <Card.Title>{show.title}</Card.Title>
+                      <Card.Link>{show.address}</Card.Link>
+                      {Auth.loggedIn() && (
+                        <Button
+                          disabled={savedShowIds?.some((savedShowId) => savedShowId === show.showId)}
+                          className='btn-block btn-info'
+                          onClick={() => handleSaveShow(show.showId)}>
+                          {savedShowIds?.some((savedShowId) => savedShowId === show.showId)
+                            ? 'This show has already been saved!'
+                            : 'Save this Show!'}
+                          </Button>
+                      )}
                     </Card.Body>
                   </Card>
                 );

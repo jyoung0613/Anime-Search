@@ -41,17 +41,32 @@ export const ADD_USER = gql`
 
 export const SAVE_SHOW = gql`
   mutation saveShow($newShow: InputShow!) {
-    savedShow(newShow: $newShow) {
+    saveShow(newShow: $newShow) {
       _id
       username
       email
-      savedShow {
-        showid
+      savedShows {
+        showId
         title
-        description
+        address
         image
-        link
       }
     }
   }
-`
+`;
+
+export const REMOVE_SHOW = gql`
+mutation removeShow($showId: ID!) {
+  removeShow(showId: $showId) {
+    _id
+    username
+    email
+    savedShows {
+      showId
+      title
+      address
+      image
+    }
+  }
+}
+`;

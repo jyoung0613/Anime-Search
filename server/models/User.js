@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcryptjs = require('bcryptjs');
 
-const showSchema = require("./Show")
+// import schema from Show.js
+const showSchema = require('./Show');
 
 const userSchema = new Schema(
     {
@@ -21,14 +22,13 @@ const userSchema = new Schema(
             required: true,
         },
 
-        // set saveShow to be an array of data that adheres to the ShowSchema
-        savedShow: [showSchema],
+        savedShows: [showSchema],
     },
-    // set to use virtual below
+
     {
         toJSON: {
             virtuals: true,
-        }
+        },
     }
 );
 
@@ -47,11 +47,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcryptjs.compare(password, this.password);
 };
 
-userSchema.virtual("showCount").get(function () {
-    return this.savedShows.length
-})
-
-
+// when we query a user, we'll also get another field called `showCount` with the number of saved shows we have
+userSchema.virtual('showCount').get(function () {
+    return this.savedShows.length;
+});
 
 const User = model('User', userSchema);
 

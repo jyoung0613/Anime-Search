@@ -1,26 +1,20 @@
-const { Schema } = require("mongoose")
+const { Schema } = require('mongoose');
 
-// this will be for the save show 
-const ShowSchema = new Schema({
-    description: {
-        type: String,
-        required: true,
-    },
-
+const showSchema = new Schema({
     showId: {
         type: String,
-        required: true,
-    },
-    image: {
-        type: String
-    },
-    link: {
-        type: String
     },
     title: {
         type: String,
-        required: true
-    }
-})
+        required: true,
+    },
+    address: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
 
-module.exports = ShowSchema
+});
+
+module.exports = showSchema;

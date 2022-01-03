@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Anime Search",
+  "name": "Project 3",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,10 @@
       "sizes": "512x512"
     }
   ],
+  "orientation": "portrait",
   "start_url": ".",
   "display": "standalone",
+  "description": "An application that allows you to search for Anime and save a list of shows with link to view",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

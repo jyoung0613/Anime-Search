@@ -16,14 +16,28 @@ const typeDefs = gql`
         username: String!
         email: String!
         showCount: Int
-        saveShow: [Show]
+        savedShows: [Show]
     }
-    
+
     type Auth {
         token: ID!
         user: User
     }
 
+    type Show {
+        showId: ID!
+        title: String
+        address: String
+        image: String
+    }
+
+    input InputShow {
+        showId: String
+        title: String
+        address: String
+        image: String
+    }
+    
     type Query {
         me: User
     }
@@ -42,8 +56,8 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        saveShow(input: SaveShowInput): User
-        removeShow(ShowId: String!): User
+        saveShow(newShow: InputShow!): User
+        removeShow(showId: ID!): User
     }
 
     

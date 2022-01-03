@@ -18,6 +18,7 @@ const SignupForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [addUser, { error, data }] = useMutation(ADD_USER);
+  console.log(data);
 
   useEffect(() => {
     if (error) {
@@ -50,6 +51,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
+      
 
       Auth.login(data.addUser.token);
     } catch (err) {
@@ -77,6 +79,7 @@ const SignupForm = () => {
           <Form.Control
             type='text'
             placeholder='Your username'
+            autoComplete='current-username'
             name='username'
             onChange={handleInputChange}
             value={userFormData.username}
@@ -90,6 +93,7 @@ const SignupForm = () => {
           <Form.Control
             type='email'
             placeholder='Your email address'
+            autoComplete='current-email'
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
@@ -103,6 +107,7 @@ const SignupForm = () => {
           <Form.Control
             type='password'
             placeholder='Your password'
+            autoComplete='current-password'
             name='password'
             onChange={handleInputChange}
             value={userFormData.password}
