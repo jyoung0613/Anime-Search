@@ -43,13 +43,13 @@ const SavedShows = () => {
                 </Container>
             </Jumbotron>
             <Container>
-                <h2>
+                {/* <h2>
                     {userData.savedShows.length
                         ? `Viewing ${userData.savedShows.length} saved ${userData.savedShows.length === 1 ? 'show' : 'shows'}:`
                         : 'You have no saved shows!'}
-                </h2>
+                </h2> */}
                 <CardColumns>
-                    {userData.savedShows.map((show) => {
+                    {/* {userData.savedShows.map((show) => {
                         return (
                             <Card key={show.showId} border='dark'>
                                 {show.image ? <Card.Img src={show.image} alt={`The cover for ${show.title}`} variant='top' /> : null}
@@ -62,7 +62,7 @@ const SavedShows = () => {
                                 </Card.Body>
                             </Card>
                         );
-                    })}
+                    })} */}
                 </CardColumns>
             </Container>
         </>
