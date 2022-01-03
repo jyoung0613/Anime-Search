@@ -42,10 +42,6 @@ const SearchShows = () => {
     .then(data => data.json())
       .then(data => setSearchedShow(data))
 
-<<<<<<< HEAD
-    }
-    
-=======
     };
 
     const handleSaveShow = async (showId) => {
@@ -66,7 +62,6 @@ const SearchShows = () => {
         console.error(err);
       }
     };
->>>>>>> 561ef13427962f3639555b4656f2172048604c11
 
   return (
     <>
