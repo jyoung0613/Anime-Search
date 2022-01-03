@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcryptjs = require('bcryptjs');
 
+const showSchema = require("./Show")
+
 const userSchema = new Schema(
     {
         username: {
@@ -18,7 +20,16 @@ const userSchema = new Schema(
             type: String,
             required: true,
         },
+
+        // set saveShow to be an array of data that adheres to the ShowSchema
+        savedShow: [showSchema],
     },
+    // set to use virtual below
+    {
+        toJSON: {
+            virtuals: true,
+        }
+    }
 );
 
 // hash user password
@@ -35,6 +46,11 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcryptjs.compare(password, this.password);
 };
+
+userSchema.virtual("showCount").get(function () {
+    return this.savedShows.length
+})
+
 
 
 const User = model('User', userSchema);

@@ -13,6 +13,7 @@ import { useMutation } from '@apollo/client';
 import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
 import { SAVE_SHOW } from "../utils/mutations"
 import { SHOWS } from "../utils/queries"
+
 const SearchShows = () => {
   const [searchedShow, setSearchedShow] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -46,6 +47,7 @@ useEffect(() => {
       .then(data => setSearchedShow(data))
 
     }
+    
 
   return (
     <>
