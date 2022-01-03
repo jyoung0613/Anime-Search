@@ -4,10 +4,6 @@ import Auth from '../utils/auth';
 import { saveShowIds, getSavedShowIds } from "../utils/localStorage"
 import { useMutation } from '@apollo/client';
 import { SAVE_SHOW } from "../utils/mutations"
-<<<<<<< HEAD
-import { SHOWS } from "../utils/queries"
-=======
->>>>>>> 561ef13427962f3639555b4656f2172048604c11
 
 const SearchShows = () => {
   const [searchedShow, setSearchedShow] = useState([]);
