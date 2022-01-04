@@ -15,17 +15,18 @@ const typeDefs = gql`
     }
 
     type Show {
-        showId: ID
+        showId: ID!
         title: String
-        address: String
-        image: String
+        url: String
+        image_url: String
+
     }
 
     input InputShow {
         showId: String
         title: String
-        address: String
-        image: String
+        url: String
+        image_url: String
     }
     
     type Query {

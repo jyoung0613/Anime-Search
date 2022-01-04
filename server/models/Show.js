@@ -8,10 +8,10 @@ const showSchema = new Schema({
         type: String,
         required: true,
     },
-    address: {
+    url: {
         type: String,
     },
-    image: {
+    image_url: {
         type: String,
     },
 

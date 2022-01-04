@@ -16,6 +16,7 @@ const SearchShows = () => {
   useEffect(() => {
     return () => saveShowIds(savedShowIds)
   })
+  
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,19 +26,17 @@ const SearchShows = () => {
     }
 
     const options = {
-      method: "GET",
-      
+      method: 'GET',
+      qs: {q: `${searchInput}`},
       headers: {
-        "x-rapidapi-host": "top-anime.p.rapidapi.com",
-        "x-rapidapi-key": "985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604",
-        useQueryString: true,
-      },
-      
-      };
-    fetch(`https://top-anime.p.rapidapi.com/anime/${searchInput}`, options)
+        'x-rapidapi-host': 'jikan1.p.rapidapi.com',
+        'x-rapidapi-key': '985c5a5a52msh5e525b5f3d5f2adp1c9239jsn6cfdc252f604',
+        useQueryString: true
+      }
+    };
+    fetch('https://jikan1.p.rapidapi.com/search/anime', options)
     .then(data => data.json())
       .then(data => setSearchedShow(data))
-
     };
 
     const handleSaveShow = async (showId) => {
@@ -96,12 +95,12 @@ const SearchShows = () => {
           {searchedShow.length && searchedShow.map((show, i) => {
                 return (
                   <Card key={i} border='dark'>
-                    {show.image ? (
-                      <Card.Img src={show.image} alt={`The cover for ${show.title}`} variant='top' />
+                    {show.image_url ? (
+                      <Card.Img src={show.image_url} alt={`The cover for ${show.title}`} variant='top' />
                     ) : null}
                     <Card.Body>
                       <Card.Title>{show.title}</Card.Title>
-                      <Card.Link>{show.address}</Card.Link>
+                      <Card.Link>{show.url}</Card.Link>
                       {Auth.loggedIn() && (
                         <Button
                           disabled={savedShowIds?.some((savedShowId) => savedShowId === show.showId)}
