@@ -7,7 +7,7 @@ import { SAVE_SHOW } from "../utils/mutations"
 
 const SearchShows = () => {
   const [searchedShows, setSearchedShows] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
   const [saveShow, { error }] = useMutation(SAVE_SHOW);
@@ -36,7 +36,6 @@ const SearchShows = () => {
     fetch(`https://top-anime.p.rapidapi.com/anime/${searchInput}`, options)
     .then(data => data.json())
       .then(data => setSearchedShows(data))
-
     };
 
     const handleSaveShow = async (showId) => {

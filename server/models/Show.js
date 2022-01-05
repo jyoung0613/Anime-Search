@@ -1,10 +1,10 @@
 const { Schema, Types} = require('mongoose');
 
 const showSchema = new Schema({
-    showId: {
+    showId:{
         type: Schema.Types.ObjectId,
         default: () => Types.ObjectId(),
-    },
+    },  
     title: {
         type: String,
         required: true,
