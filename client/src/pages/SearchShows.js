@@ -61,7 +61,7 @@ const SearchShows = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      <Jumbotron fluid className="text-light ">
         <Container>
           <h1>Search for Shows!</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -76,8 +76,8 @@ const SearchShows = () => {
                   placeholder="Search for a show"
                 />
               </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
+              <Col xs={12} sm={12} md={4}>
+                <Button type="submit" size="lg">
                   Submit Search
                 </Button>
               </Col>
