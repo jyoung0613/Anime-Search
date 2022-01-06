@@ -22,7 +22,6 @@ code {
     
 }
 
-<<<<<<< HEAD
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Crimson Text', serif;
   color:var(--dark-accent);
@@ -88,10 +87,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--secondary);
   opacity: 0.5;
  }
-=======
 .card:hover {
   transform: scale(1.03);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   opacity: 1;
 }
->>>>>>> 33446907b926c5792c95744dd36b00661f433762
