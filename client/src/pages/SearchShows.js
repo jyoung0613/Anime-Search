@@ -41,6 +41,7 @@ const SearchShows = () => {
     const handleSaveShow = async (showId) => {
       const showToSave = searchedShows.find((show) => show.showId === showId);
       const token = Auth.loggedIn() ? Auth.getToken() : null;
+      console.log(showId);
 
       if (!token) {
         return false;
