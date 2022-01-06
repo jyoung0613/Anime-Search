@@ -24,8 +24,9 @@ code {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Crimson Text', serif;
-  color: #d85426;
+  color:var(--dark-accent);
   text-transform: uppercase;
+  text-shadow:2px 2px 2px var(--primary);
  }
 
  .navbar {
@@ -33,6 +34,16 @@ h1, h2, h3, h4, h5, h6 {
     /*background-color:var(--secondary);*/
     opacity: 0.95;
     
+ }
+ .navbar h1 {
+   font-weight: 900;
+   text-shadow: 2px 2px 2px var(--light-accent);
+ }
+
+ .nav-link:hover{
+   background-color: var(--light-accent);
+   border-radius: 10px;
+   opacity: 0.9;
  }
 
  .jumbotron {
@@ -46,12 +57,33 @@ h1, h2, h3, h4, h5, h6 {
 
   .jumbotron button {
    background-color: var(--secondary);
+   padding: 10px 0 ;
  }
 
    .jumbotron button:hover{
   background-color: var(--dark-accent);
  }
 
- .container {
+ .modal {
+   border-radius: 25px;
+ }
 
+ .modal-body {
+   background-image: url(./my-hero-academia-gd58fa8f6d_640.jpg);
+   background-size: cover;
+   background-position: top center;
+ }
+
+ .form-control{
+   opacity: 0.6;
+ }
+
+ .form-btn {
+   background-color: var(--dark-accent);
+ }
+
+ .modal .nav-link:hover{
+   color: var(--light-accent);
+  background-color: var(--secondary);
+  opacity: 0.5;
  }

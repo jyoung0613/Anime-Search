@@ -76,7 +76,7 @@ const SearchShows = () => {
                   placeholder="Search for a show"
                 />
               </Col>
-              <Col xs={12} sm={12} md={4}>
+              <Col xs={12} sm={12} md={4} className ="btn-div">
                 <Button type="submit" size="lg">
                   Submit Search
                 </Button>

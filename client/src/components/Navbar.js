@@ -42,6 +42,7 @@ const AppNavbar = () => {
       </Navbar>
       {/* set modal data up */}
       <Modal
+        className="modal"
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
@@ -60,7 +61,7 @@ const AppNavbar = () => {
               </Nav>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body class ="modal-body">
             <Tab.Content>
               <Tab.Pane eventKey='login'>
                 <LoginForm handleModalClose={() => setShowModal(false)} />
