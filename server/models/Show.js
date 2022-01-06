@@ -1,9 +1,10 @@
-const { Schema } = require('mongoose');
+const { Schema, Types} = require('mongoose');
 
 const showSchema = new Schema({
-    showId: {
-        type: String,
-    },
+    showId:{
+        type: Schema.Types.ObjectId,
+        default: () => Types.ObjectId(),
+    },  
     title: {
         type: String,
         required: true,
