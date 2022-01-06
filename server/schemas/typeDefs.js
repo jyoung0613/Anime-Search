@@ -15,7 +15,7 @@ const typeDefs = gql`
     }
 
     type Show {
-        showId: ID
+        showId: ID!
         title: String
         address: String
         image: String

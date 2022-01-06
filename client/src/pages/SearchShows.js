@@ -6,12 +6,11 @@ import { useMutation } from '@apollo/client';
 import { SAVE_SHOW } from "../utils/mutations"
 
 const SearchShows = () => {
-  const [searchedShow, setSearchedShow] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchedShows, setSearchedShows] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
   const [saveShow, { error }] = useMutation(SAVE_SHOW);
-  console.log(error);
 
   useEffect(() => {
     return () => saveShowIds(savedShowIds)
@@ -36,12 +35,11 @@ const SearchShows = () => {
       };
     fetch(`https://top-anime.p.rapidapi.com/anime/${searchInput}`, options)
     .then(data => data.json())
-      .then(data => setSearchedShow(data))
-
+      .then(data => setSearchedShows(data))
     };
 
     const handleSaveShow = async (showId) => {
-      const showToSave = searchedShow.find((show) => show.showId === showId);
+      const showToSave = searchedShows.find((show) => show.showId === showId);
       const token = Auth.loggedIn() ? Auth.getToken() : null;
 
       if (!token) {
@@ -88,12 +86,12 @@ const SearchShows = () => {
 
       <Container>
       <h2>
-        {searchedShow.length
-          ? `Viewing ${searchedShow.length} results:`
+        {searchedShows.length
+          ? `Viewing ${searchedShows.length} results:`
           : 'Search for a show to begin'}
       </h2>
         <CardColumns>
-          {searchedShow.length && searchedShow.map((show, i) => {
+          {searchedShows.length && searchedShows.map((show, i) => {
                 return (
                   <Card key={i} border='dark'>
                     {show.image ? (
