@@ -92,3 +92,29 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   opacity: 1;
 }
+
+
+@media screen and (min-width: 992px) {
+  .jumbotron {
+   background-position: bottom;
+  }
+}
+
+
+@media screen and (min-width: 1200px) {
+  .jumbotron {
+    background-size: fill;
+    background-position:0px 600px;
+   
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jumbotron {
+    background-position: top;
+  }
+
+  .jumbotron button {
+    margin-top: 5px;
+  }
+}
