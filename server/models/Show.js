@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const { Schema, Types} = require('mongoose');
 
 const showSchema = new Schema({
@@ -6,15 +5,6 @@ const showSchema = new Schema({
         type: Schema.Types.ObjectId,
         default: () => Types.ObjectId(),
     },  
-=======
-const { Schema, Types } = require('mongoose');
-
-const showSchema = new Schema({
-    showId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),  
-    },
->>>>>>> 2699b28f68aca601cb2e5d43c85795859146bda7
     title: {
         type: String,
         required: true,
