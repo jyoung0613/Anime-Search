@@ -105,6 +105,7 @@ const SignupForm = () => {
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
+          class="form-control"
             type='password'
             placeholder='Your password'
             autoComplete='current-password'
@@ -118,7 +119,7 @@ const SignupForm = () => {
         <Button
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          class= "form-btn" >
           Submit
         </Button>
       </Form>

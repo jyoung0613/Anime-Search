@@ -6,12 +6,11 @@ import { useMutation } from '@apollo/client';
 import { SAVE_SHOW } from "../utils/mutations"
 
 const SearchShows = () => {
-  const [searchedShow, setSearchedShow] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchedShows, setSearchedShows] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
   const [savedShowIds, setSavedShowIds] = useState(getSavedShowIds());
 
   const [saveShow, { error }] = useMutation(SAVE_SHOW);
-  console.log(error);
 
   useEffect(() => {
     return () => saveShowIds(savedShowIds)
@@ -36,12 +35,13 @@ const SearchShows = () => {
     };
     fetch('https://jikan1.p.rapidapi.com/search/anime', options)
     .then(data => data.json())
-      .then(data => setSearchedShow(data))
+      .then(data => setSearchedShows(data))
     };
 
     const handleSaveShow = async (showId) => {
-      const showToSave = searchedShow.find((show) => show.showId === showId);
+      const showToSave = searchedShows.find((show) => show.showId === showId);
       const token = Auth.loggedIn() ? Auth.getToken() : null;
+      console.log(showId);
 
       if (!token) {
         return false;
@@ -60,7 +60,7 @@ const SearchShows = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      <Jumbotron fluid className="text-light ">
         <Container>
           <h1>Search for Shows!</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -75,8 +75,8 @@ const SearchShows = () => {
                   placeholder="Search for a show"
                 />
               </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
+              <Col xs={12} sm={12} md={4} className ="btn-div">
+                <Button type="submit" size="lg">
                   Submit Search
                 </Button>
               </Col>
@@ -87,12 +87,12 @@ const SearchShows = () => {
 
       <Container>
       <h2>
-        {searchedShow.length
-          ? `Viewing ${searchedShow.length} results:`
+        {searchedShows.length
+          ? `Viewing ${searchedShows.length} results:`
           : 'Search for a show to begin'}
       </h2>
         <CardColumns>
-          {searchedShow.length && searchedShow.map((show, i) => {
+          {searchedShows.length && searchedShows.map((show, i) => {
                 return (
                   <Card key={i} border='dark'>
                     {show.image_url ? (

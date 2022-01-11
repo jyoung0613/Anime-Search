@@ -12,27 +12,29 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar  expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            Anime Search
+          <h1> Anime Search</h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
               <Nav.Link as={Link} to='/'>
-                Search For Anime
+               <h3> Search For Anime</h3>
               </Nav.Link>
               {/* if user is logged in show saved anime and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
-                    See Your Anime
+                    <h3>See Your Anime</h3>
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setShowModal(true)}>
+                 <h3> Login/Sign Up</h3>
+                  </Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
@@ -40,6 +42,7 @@ const AppNavbar = () => {
       </Navbar>
       {/* set modal data up */}
       <Modal
+        className="modal"
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
@@ -58,7 +61,7 @@ const AppNavbar = () => {
               </Nav>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body class ="modal-body">
             <Tab.Content>
               <Tab.Pane eventKey='login'>
                 <LoginForm handleModalClose={() => setShowModal(false)} />
